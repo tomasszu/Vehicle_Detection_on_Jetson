@@ -9,7 +9,7 @@ print(torch.cuda.is_available())
 
 # Load the ONNX model
 onnx_model_path = "yolov8n.onnx"
-session = ort.InferenceSession(onnx_model_path, providers=["CPUExecutionProvider"])
+session = ort.InferenceSession(onnx_model_path, providers=["CUDAExecutionProvider"])
 
 # Load class labels (COCO dataset)
 COCO_CLASSES = ["person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light", 
@@ -43,6 +43,52 @@ output_name = session.get_outputs()[0].name
 outputs = session.run([output_name], {input_name: image_resized})[0]
 
 inference_time = (time.time() - start_time) * 1000  # Convert time to milliseconds
+print(f"Inference time: {inference_time:.2f} ms")
+start_time = time.time()  # Start the timer
+
+# Run inference
+input_name = session.get_inputs()[0].name
+output_name = session.get_outputs()[0].name
+outputs = session.run([output_name], {input_name: image_resized})[0]
+
+inference_time = (time.time() - start_time) * 1000  # Convert time to milliseconds
+print(f"Inference time: {inference_time:.2f} ms")
+start_time = time.time()  # Start the timer
+
+# Run inference
+input_name = session.get_inputs()[0].name
+output_name = session.get_outputs()[0].name
+outputs = session.run([output_name], {input_name: image_resized})[0]
+
+inference_time = (time.time() - start_time) * 1000  # Convert time to milliseconds
+print(f"Inference time: {inference_time:.2f} ms")
+start_time = time.time()  # Start the timer
+
+# Run inference
+input_name = session.get_inputs()[0].name
+output_name = session.get_outputs()[0].name
+outputs = session.run([output_name], {input_name: image_resized})[0]
+
+inference_time = (time.time() - start_time) * 1000  # Convert time to milliseconds
+print(f"Inference time: {inference_time:.2f} ms")
+start_time = time.time()  # Start the timer
+
+# Run inference
+input_name = session.get_inputs()[0].name
+output_name = session.get_outputs()[0].name
+outputs = session.run([output_name], {input_name: image_resized})[0]
+
+inference_time = (time.time() - start_time) * 1000  # Convert time to milliseconds
+print(f"Inference time: {inference_time:.2f} ms")
+start_time = time.time()  # Start the timer
+
+# Run inference
+input_name = session.get_inputs()[0].name
+output_name = session.get_outputs()[0].name
+outputs = session.run([output_name], {input_name: image_resized})[0]
+
+inference_time = (time.time() - start_time) * 1000  # Convert time to milliseconds
+print(f"Inference time: {inference_time:.2f} ms")
 print(outputs.shape)
 
 def post_process(outputs, conf_threshold=0.25, iou_threshold=0.4):
@@ -79,4 +125,3 @@ def post_process(outputs, conf_threshold=0.25, iou_threshold=0.4):
 detected_objects = post_process(outputs)
 
 print(detected_objects)
-print(f"Inference time: {inference_time:.2f} ms")
